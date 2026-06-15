@@ -94,3 +94,62 @@ export const activity: Activity[] = [
   { who: "Priya Nair", initials: "PN", what: "shared report “Q2 Revenue”", when: "3 hrs ago", type: "update" },
   { who: "Tilda Brand", initials: "TB", what: "updated the workspace logo", when: "yesterday", type: "update" },
 ]
+
+// --- Task Management (agent tasks) ---
+
+export type TaskStatus = "in_progress" | "completed" | "paused" | "error"
+export type Validation = "achieved" | "partial" | "not_achieved" | null
+
+export type Task = {
+  id: string
+  title: string
+  description: string
+  agent: string
+  status: TaskStatus
+  validation: Validation
+  createdAt: string
+}
+
+export const taskKpis = {
+  total: 17,
+  inProgress: 5,
+  pendingValidation: 4,
+  completed: 8,
+}
+
+export const tasks: Task[] = [
+  { id: "t1", title: "Competitor analysis", description: "Research competitor activities and positioning in Q3", agent: "Scheduling agent", status: "in_progress", validation: null, createdAt: "05 Nov 2025 13:00" },
+  { id: "t2", title: "Employee satisfaction survey", description: "Gather and analyze feedback from the employee satisfaction survey conducted in Q3", agent: "Scheduling agent", status: "completed", validation: "partial", createdAt: "04 Nov 2025 12:00" },
+  { id: "t3", title: "Social media engagement report", description: "Compile engagement metrics and insights from social media platforms for Q3", agent: "Scheduling agent", status: "error", validation: null, createdAt: "02 Nov 2025 09:00" },
+  { id: "t4", title: "Product quality assessment", description: "Analyze product quality reports and returns from Q3", agent: "Scheduling agent", status: "completed", validation: "not_achieved", createdAt: "01 Nov 2025 10:00" },
+  { id: "t5", title: "Website performance review", description: "Evaluate the website's load times and uptime statistics for Q3", agent: "Scheduling agent", status: "completed", validation: "achieved", createdAt: "30 Oct 2025 14:00" },
+  { id: "t6", title: "Supply chain assessment", description: "Evaluate supply chain efficiency and issues identified in Q3", agent: "Scheduling agent", status: "completed", validation: "achieved", createdAt: "29 Oct 2025 08:00" },
+  { id: "t7", title: "Customer support evaluation", description: "Analyze customer support ticket trends and resolutions for Q3", agent: "Scheduling agent", status: "in_progress", validation: null, createdAt: "28 Oct 2025 16:30" },
+  { id: "t8", title: "Technician matching", description: "Match available technicians to scheduled installation requests", agent: "Scheduling agent", status: "in_progress", validation: null, createdAt: "27 Oct 2025 15:00" },
+  { id: "t9", title: "Customer feedback report", description: "Compile and analyse customer feedback from Q3 surveys to identify improvement areas", agent: "Scheduling agent", status: "paused", validation: null, createdAt: "25 Oct 2025 09:30" },
+  { id: "t10", title: "Marketing campaign analysis", description: "Assess the effectiveness of the Q3 marketing campaigns", agent: "Scheduling agent", status: "completed", validation: "achieved", createdAt: "22 Oct 2025 11:00" },
+]
+
+// --- Task detail (Plan / Interact) ---
+
+export type StepState = "done" | "active" | "todo"
+export type PlanStep = { title: string; description: string; state: StepState }
+
+export const planSteps: PlanStep[] = [
+  { title: "Request received", description: "Customer submits installation request", state: "done" },
+  { title: "Agent assigned", description: "Agent reviews and accepts the request", state: "done" },
+  { title: "Installation progress", description: "Technician performs installation", state: "active" },
+  { title: "Customer confirmation", description: "Customer approves completed work", state: "todo" },
+  { title: "Task completed", description: "Request closed and archived", state: "todo" },
+]
+
+export type ChatStatus = "completed" | "action" | "error" | "in_progress"
+export type ChatMessage = { time: string; status: ChatStatus; text: string }
+
+export const chatMessages: ChatMessage[] = [
+  { time: "11:22", status: "completed", text: "Great news! I found 3 available technicians" },
+  { time: "11:40", status: "action", text: "Your customer wants a morning slot — can you confirm?" },
+  { time: "11:55", status: "completed", text: "Just checking equipment availability…" },
+  { time: "12:10", status: "error", text: "Oops, couldn't book the appointment" },
+  { time: "13:00", status: "in_progress", text: "Let me try that again for you…" },
+]

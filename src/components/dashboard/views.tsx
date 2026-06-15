@@ -19,6 +19,7 @@ import { ActivityCard } from "@/components/dashboard/activity-card"
 import { QuickSettings } from "@/components/dashboard/quick-settings"
 import { FaqCard } from "@/components/dashboard/faq-card"
 import { TransactionsTable } from "@/components/dashboard/transactions-table"
+import { TaskManagement } from "@/components/dashboard/task-management"
 
 export function OverviewView() {
   return (
@@ -46,19 +47,7 @@ export function OverviewView() {
 }
 
 export function SalesView() {
-  return (
-    <>
-      <div>
-        <h2 className="text-lg font-semibold">Sales</h2>
-        <p className="text-sm text-muted-foreground">
-          Revenue, invoices and conversion at a glance.
-        </p>
-      </div>
-      <SectionCards />
-      <RevenueChart />
-      <TransactionsTable />
-    </>
-  )
+  return <TaskManagement />
 }
 
 export function PlaceholderView({ title }: { title: string }) {
