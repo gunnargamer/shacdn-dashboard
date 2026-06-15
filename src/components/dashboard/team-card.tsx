@@ -23,10 +23,10 @@ export function TeamCard() {
     <Card>
       <CardHeader>
         <CardTitle>Team</CardTitle>
-        <CardDescription>Mitglieder & Zugriff</CardDescription>
+        <CardDescription>Members & access</CardDescription>
         <CardAction>
           <Button variant="outline" size="sm">
-            Einladen
+            Invite
           </Button>
         </CardAction>
       </CardHeader>
@@ -37,7 +37,7 @@ export function TeamCard() {
             <div className="flex items-center gap-3 py-1">
               <div className="relative">
                 <Avatar className="size-9">
-                  <AvatarFallback>{m.initialen}</AvatarFallback>
+                  <AvatarFallback>{m.initials}</AvatarFallback>
                 </Avatar>
                 <span
                   className={`absolute right-0 bottom-0 size-2.5 rounded-full ring-2 ring-card ${
@@ -57,7 +57,7 @@ export function TeamCard() {
                   <HoverCardContent className="w-64">
                     <div className="flex gap-3">
                       <Avatar>
-                        <AvatarFallback>{m.initialen}</AvatarFallback>
+                        <AvatarFallback>{m.initials}</AvatarFallback>
                       </Avatar>
                       <div className="grid gap-0.5">
                         <span className="text-sm font-semibold">{m.name}</span>
@@ -65,7 +65,7 @@ export function TeamCard() {
                           {m.email}
                         </span>
                         <span className="text-xs text-muted-foreground">
-                          Rolle: {m.rolle}
+                          Role: {m.role}
                         </span>
                       </div>
                     </div>
@@ -73,8 +73,8 @@ export function TeamCard() {
                 </HoverCard>
                 <span className="text-xs text-muted-foreground">{m.email}</span>
               </div>
-              <Badge variant="secondary">{m.rolle}</Badge>
-              <Switch defaultChecked={m.online} aria-label={`Zugriff ${m.name}`} />
+              <Badge variant="secondary">{m.role}</Badge>
+              <Switch defaultChecked={m.online} aria-label={`Access ${m.name}`} />
             </div>
           </div>
         ))}

@@ -60,13 +60,13 @@ const statusVariant: Record<
   TxStatus,
   "default" | "secondary" | "destructive" | "outline"
 > = {
-  bezahlt: "secondary",
-  offen: "outline",
-  storniert: "destructive",
+  paid: "secondary",
+  open: "outline",
+  cancelled: "destructive",
 }
 
 function CustomerCell({ t }: { t: Transaction }) {
-  const initials = t.kunde
+  const initials = t.customer
     .split(" ")
     .map((p) => p[0])
     .slice(0, 2)
@@ -80,7 +80,7 @@ function CustomerCell({ t }: { t: Transaction }) {
               <AvatarFallback className="text-xs">{initials}</AvatarFallback>
             </Avatar>
             <div className="grid leading-tight">
-              <span className="text-sm">{t.kunde}</span>
+              <span className="text-sm">{t.customer}</span>
               <span className="text-xs text-muted-foreground">{t.email}</span>
             </div>
           </button>
@@ -92,10 +92,10 @@ function CustomerCell({ t }: { t: Transaction }) {
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
           <div className="grid gap-0.5">
-            <span className="text-sm font-semibold">{t.kunde}</span>
+            <span className="text-sm font-semibold">{t.customer}</span>
             <span className="text-xs text-muted-foreground">{t.email}</span>
             <span className="text-xs text-muted-foreground">
-              Letzte Rechnung: {t.betrag}
+              Last invoice: {t.amount}
             </span>
           </div>
         </div>
@@ -112,11 +112,11 @@ function Rows({ filter }: { filter?: TxStatus }) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Rechnung</TableHead>
-          <TableHead>Kunde</TableHead>
+          <TableHead>Invoice</TableHead>
+          <TableHead>Customer</TableHead>
           <TableHead>Status</TableHead>
-          <TableHead>Datum</TableHead>
-          <TableHead className="text-right">Betrag</TableHead>
+          <TableHead>Date</TableHead>
+          <TableHead className="text-right">Amount</TableHead>
           <TableHead className="w-10" />
         </TableRow>
       </TableHeader>
@@ -132,15 +132,15 @@ function Rows({ filter }: { filter?: TxStatus }) {
                 {t.status}
               </Badge>
             </TableCell>
-            <TableCell className="text-muted-foreground">{t.datum}</TableCell>
+            <TableCell className="text-muted-foreground">{t.date}</TableCell>
             <TableCell className="text-right font-medium tabular-nums">
-              {t.betrag}
+              {t.amount}
             </TableCell>
             <TableCell>
               <DropdownMenu>
                 <DropdownMenuTrigger
                   render={
-                    <Button variant="ghost" size="icon" aria-label="Aktionen">
+                    <Button variant="ghost" size="icon" aria-label="Actions">
                       <MoreHorizontal className="size-4" />
                     </Button>
                   }
@@ -148,18 +148,18 @@ function Rows({ filter }: { filter?: TxStatus }) {
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>{t.id}</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => toast("Rechnung geöffnet", { description: t.id })}>
-                    Ansehen
+                  <DropdownMenuItem onClick={() => toast("Invoice opened", { description: t.id })}>
+                    View
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => toast.success("Dupliziert", { description: t.id })}>
-                    Duplizieren
+                  <DropdownMenuItem onClick={() => toast.success("Duplicated", { description: t.id })}>
+                    Duplicate
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     variant="destructive"
-                    onClick={() => toast.error("Gelöscht", { description: t.id })}
+                    onClick={() => toast.error("Deleted", { description: t.id })}
                   >
-                    Löschen
+                    Delete
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -175,8 +175,8 @@ export function TransactionsTable() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Transaktionen</CardTitle>
-        <CardDescription>Letzte Rechnungen im Überblick</CardDescription>
+        <CardTitle>Transactions</CardTitle>
+        <CardDescription>Recent invoices at a glance</CardDescription>
         <CardAction className="flex items-center gap-2">
           <Tooltip>
             <TooltipTrigger
@@ -184,14 +184,14 @@ export function TransactionsTable() {
                 <Button
                   variant="outline"
                   size="icon"
-                  aria-label="Exportieren"
-                  onClick={() => toast.success("Export gestartet")}
+                  aria-label="Export"
+                  onClick={() => toast.success("Export started")}
                 >
                   <Download className="size-4" />
                 </Button>
               }
             />
-            <TooltipContent>Als CSV exportieren</TooltipContent>
+            <TooltipContent>Export as CSV</TooltipContent>
           </Tooltip>
 
           <AlertDialog>
@@ -199,22 +199,22 @@ export function TransactionsTable() {
               render={
                 <Button variant="outline" size="sm">
                   <Trash2 className="size-4" />
-                  Alle löschen
+                  Delete all
                 </Button>
               }
             />
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>Alle Transaktionen löschen?</AlertDialogTitle>
+                <AlertDialogTitle>Delete all transactions?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  Diese Aktion kann nicht rückgängig gemacht werden. Alle
-                  Rechnungsdatensätze werden dauerhaft entfernt.
+                  This action cannot be undone. All invoice records will be
+                  permanently removed.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Abbrechen</AlertDialogCancel>
-                <AlertDialogAction onClick={() => toast.error("Alle Transaktionen gelöscht")}>
-                  Endgültig löschen
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={() => toast.error("All transactions deleted")}>
+                  Delete permanently
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
@@ -222,20 +222,20 @@ export function TransactionsTable() {
         </CardAction>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue="alle">
+        <Tabs defaultValue="all">
           <TabsList>
-            <TabsTrigger value="alle">Alle</TabsTrigger>
-            <TabsTrigger value="bezahlt">Bezahlt</TabsTrigger>
-            <TabsTrigger value="offen">Offen</TabsTrigger>
+            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger value="paid">Paid</TabsTrigger>
+            <TabsTrigger value="open">Open</TabsTrigger>
           </TabsList>
-          <TabsContent value="alle" className="mt-4">
+          <TabsContent value="all" className="mt-4">
             <Rows />
           </TabsContent>
-          <TabsContent value="bezahlt" className="mt-4">
-            <Rows filter="bezahlt" />
+          <TabsContent value="paid" className="mt-4">
+            <Rows filter="paid" />
           </TabsContent>
-          <TabsContent value="offen" className="mt-4">
-            <Rows filter="offen" />
+          <TabsContent value="open" className="mt-4">
+            <Rows filter="open" />
           </TabsContent>
         </Tabs>
 

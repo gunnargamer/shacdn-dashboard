@@ -1,12 +1,4 @@
-import {
-  LayoutDashboard,
-  Wallet,
-  Users,
-  BarChart3,
-  Settings,
-  LifeBuoy,
-  Boxes,
-} from "lucide-react"
+import { Boxes } from "lucide-react"
 
 import {
   Sidebar,
@@ -20,21 +12,15 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { NAV, SECONDARY, type ViewId } from "@/components/dashboard/nav"
 
-const nav = [
-  { title: "Übersicht", icon: LayoutDashboard, active: true },
-  { title: "Umsätze", icon: Wallet, active: false },
-  { title: "Kunden", icon: Users, active: false },
-  { title: "Analytics", icon: BarChart3, active: false },
-  { title: "Produkte", icon: Boxes, active: false },
-]
-
-const secondary = [
-  { title: "Einstellungen", icon: Settings },
-  { title: "Support", icon: LifeBuoy },
-]
-
-export function AppSidebar() {
+export function AppSidebar({
+  active,
+  onNavigate,
+}: {
+  active: ViewId
+  onNavigate: (id: ViewId) => void
+}) {
   return (
     <Sidebar>
       <SidebarHeader>
@@ -54,11 +40,14 @@ export function AppSidebar() {
           <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {nav.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton isActive={item.active}>
+              {NAV.map((item) => (
+                <SidebarMenuItem key={item.id}>
+                  <SidebarMenuButton
+                    isActive={item.id === active}
+                    onClick={() => onNavigate(item.id)}
+                  >
                     <item.icon />
-                    <span>{item.title}</span>
+                    <span>{item.label}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -70,11 +59,14 @@ export function AppSidebar() {
           <SidebarGroupLabel>System</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {secondary.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton>
+              {SECONDARY.map((item) => (
+                <SidebarMenuItem key={item.id}>
+                  <SidebarMenuButton
+                    isActive={item.id === active}
+                    onClick={() => onNavigate(item.id)}
+                  >
                     <item.icon />
-                    <span>{item.title}</span>
+                    <span>{item.label}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -86,7 +78,7 @@ export function AppSidebar() {
       <SidebarFooter>
         <div className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-muted-foreground">
           <span className="size-2 rounded-full bg-emerald-500" />
-          Alle Systeme online
+          All systems operational
         </div>
       </SidebarFooter>
     </Sidebar>

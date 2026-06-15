@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Filter, Moon, Plus, Sparkles, Sun } from "lucide-react"
+import { Filter, Plus, Sparkles } from "lucide-react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
@@ -46,22 +46,15 @@ import { Slider } from "@/components/ui/slider"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
 const ranges: Record<string, string> = {
-  "7": "Letzte 7 Tage",
-  "30": "Letzte 30 Tage",
-  "90": "Letztes Quartal",
-  "365": "Letztes Jahr",
+  "7": "Last 7 days",
+  "30": "Last 30 days",
+  "90": "Last quarter",
+  "365": "Last year",
 }
 
-export function Toolbar({
-  dark,
-  onToggleTheme,
-}: {
-  dark: boolean
-  onToggleTheme: () => void
-}) {
+export function Toolbar() {
   const [range, setRange] = useState("30")
 
   return (
@@ -77,23 +70,23 @@ export function Toolbar({
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Übersicht</BreadcrumbPage>
+            <BreadcrumbPage>Overview</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
 
       <div className="flex flex-wrap items-center gap-2">
-        <ToggleGroup defaultValue={["monat"]} variant="outline">
-          <ToggleGroupItem value="tag">Tag</ToggleGroupItem>
-          <ToggleGroupItem value="woche">Woche</ToggleGroupItem>
-          <ToggleGroupItem value="monat">Monat</ToggleGroupItem>
+        <ToggleGroup defaultValue={["month"]} variant="outline">
+          <ToggleGroupItem value="day">Day</ToggleGroupItem>
+          <ToggleGroupItem value="week">Week</ToggleGroupItem>
+          <ToggleGroupItem value="month">Month</ToggleGroupItem>
         </ToggleGroup>
 
         <Select
           value={range}
           onValueChange={(v) => {
             setRange(v as string)
-            toast.success("Zeitraum aktualisiert", { description: ranges[v as string] })
+            toast.success("Time range updated", { description: ranges[v as string] })
           }}
         >
           <SelectTrigger className="w-[180px]">
@@ -101,11 +94,11 @@ export function Toolbar({
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Zeitraum</SelectLabel>
-              <SelectItem value="7">Letzte 7 Tage</SelectItem>
-              <SelectItem value="30">Letzte 30 Tage</SelectItem>
-              <SelectItem value="90">Letztes Quartal</SelectItem>
-              <SelectItem value="365">Letztes Jahr</SelectItem>
+              <SelectLabel>Time range</SelectLabel>
+              <SelectItem value="7">Last 7 days</SelectItem>
+              <SelectItem value="30">Last 30 days</SelectItem>
+              <SelectItem value="90">Last quarter</SelectItem>
+              <SelectItem value="365">Last year</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -122,35 +115,35 @@ export function Toolbar({
           <PopoverContent className="w-72" align="start">
             <PopoverHeader>
               <PopoverTitle>Filter</PopoverTitle>
-              <PopoverDescription>Daten eingrenzen</PopoverDescription>
+              <PopoverDescription>Narrow down the data</PopoverDescription>
             </PopoverHeader>
             <div className="grid gap-4 py-2">
               <div className="grid gap-2">
                 <Label>Status</Label>
                 <div className="flex items-center gap-2">
-                  <Checkbox id="f-bezahlt" defaultChecked />
-                  <Label htmlFor="f-bezahlt" className="font-normal">Bezahlt</Label>
+                  <Checkbox id="f-paid" defaultChecked />
+                  <Label htmlFor="f-paid" className="font-normal">Paid</Label>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Checkbox id="f-offen" />
-                  <Label htmlFor="f-offen" className="font-normal">Offen</Label>
+                  <Checkbox id="f-open" />
+                  <Label htmlFor="f-open" className="font-normal">Open</Label>
                 </div>
               </div>
               <div className="grid gap-2">
-                <Label>Sortierung</Label>
-                <RadioGroup defaultValue="neu" className="gap-2">
+                <Label>Sort</Label>
+                <RadioGroup defaultValue="newest" className="gap-2">
                   <div className="flex items-center gap-2">
-                    <RadioGroupItem value="neu" id="s-neu" />
-                    <Label htmlFor="s-neu" className="font-normal">Neueste zuerst</Label>
+                    <RadioGroupItem value="newest" id="s-newest" />
+                    <Label htmlFor="s-newest" className="font-normal">Newest first</Label>
                   </div>
                   <div className="flex items-center gap-2">
-                    <RadioGroupItem value="betrag" id="s-betrag" />
-                    <Label htmlFor="s-betrag" className="font-normal">Höchster Betrag</Label>
+                    <RadioGroupItem value="amount" id="s-amount" />
+                    <Label htmlFor="s-amount" className="font-normal">Highest amount</Label>
                   </div>
                 </RadioGroup>
               </div>
               <div className="grid gap-2">
-                <Label>Mindestbetrag</Label>
+                <Label>Minimum amount</Label>
                 <Slider defaultValue={[500]} max={3000} step={100} />
               </div>
             </div>
@@ -161,14 +154,14 @@ export function Toolbar({
           <Button
             variant="ghost"
             onClick={() =>
-              toast("Bericht wird erstellt", {
-                description: "Wir benachrichtigen dich, sobald er fertig ist.",
-                action: { label: "Rückgängig", onClick: () => {} },
+              toast("Creating report", {
+                description: "We'll notify you when it's ready.",
+                action: { label: "Undo", onClick: () => {} },
               })
             }
           >
             <Sparkles className="size-4" />
-            KI-Insight
+            AI insight
           </Button>
 
           <Dialog>
@@ -176,83 +169,67 @@ export function Toolbar({
               render={
                 <Button>
                   <Plus className="size-4" />
-                  Neuer Bericht
+                  New report
                 </Button>
               }
             />
             <DialogContent className="sm:max-w-md">
               <DialogHeader>
-                <DialogTitle>Neuer Bericht</DialogTitle>
+                <DialogTitle>New report</DialogTitle>
                 <DialogDescription>
-                  Lege einen neuen Auswertungsbericht an.
+                  Create a new analytics report.
                 </DialogDescription>
               </DialogHeader>
               <div className="grid gap-4 py-2">
                 <div className="grid gap-2">
                   <Label htmlFor="report-name">Name</Label>
-                  <Input id="report-name" placeholder="z. B. Q3 Umsatz" />
+                  <Input id="report-name" placeholder="e.g. Q3 Revenue" />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="report-type">Typ</Label>
-                  <Select defaultValue="umsatz">
+                  <Label htmlFor="report-type">Type</Label>
+                  <Select defaultValue="revenue">
                     <SelectTrigger id="report-type" className="w-full">
                       <SelectValue>
                         {(v) =>
-                          ({ umsatz: "Umsatz", kunden: "Kunden", traffic: "Traffic" }[
+                          ({ revenue: "Revenue", customers: "Customers", traffic: "Traffic" }[
                             v as string
                           ])
                         }
                       </SelectValue>
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="umsatz">Umsatz</SelectItem>
-                      <SelectItem value="kunden">Kunden</SelectItem>
+                      <SelectItem value="revenue">Revenue</SelectItem>
+                      <SelectItem value="customers">Customers</SelectItem>
                       <SelectItem value="traffic">Traffic</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="report-desc">Beschreibung</Label>
-                  <Textarea id="report-desc" placeholder="Optionale Notiz…" />
+                  <Label htmlFor="report-desc">Description</Label>
+                  <Textarea id="report-desc" placeholder="Optional note…" />
                 </div>
                 <div className="flex items-center justify-between rounded-md border p-3">
                   <div className="grid gap-0.5">
-                    <Label htmlFor="report-share">Mit Team teilen</Label>
+                    <Label htmlFor="report-share">Share with team</Label>
                     <span className="text-xs text-muted-foreground">
-                      Alle Mitglieder können den Bericht sehen.
+                      All members can view the report.
                     </span>
                   </div>
                   <Switch id="report-share" defaultChecked />
                 </div>
               </div>
               <DialogFooter>
-                <DialogClose render={<Button variant="outline">Abbrechen</Button>} />
+                <DialogClose render={<Button variant="outline">Cancel</Button>} />
                 <DialogClose
                   render={
-                    <Button onClick={() => toast.success("Bericht erstellt")}>
-                      Erstellen
+                    <Button onClick={() => toast.success("Report created")}>
+                      Create
                     </Button>
                   }
                 />
               </DialogFooter>
             </DialogContent>
           </Dialog>
-
-          <Tooltip>
-            <TooltipTrigger
-              render={
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={onToggleTheme}
-                  aria-label="Theme wechseln"
-                >
-                  {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
-                </Button>
-              }
-            />
-            <TooltipContent>{dark ? "Hell" : "Dunkel"}</TooltipContent>
-          </Tooltip>
         </div>
       </div>
     </div>

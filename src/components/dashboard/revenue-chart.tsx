@@ -16,28 +16,28 @@ import {
 import { revenue } from "@/data"
 
 const chartConfig = {
-  umsatz: { label: "Umsatz", color: "var(--chart-1)" },
-  ziel: { label: "Ziel", color: "var(--chart-2)" },
+  revenue: { label: "Revenue", color: "var(--chart-1)" },
+  target: { label: "Target", color: "var(--chart-2)" },
 } satisfies ChartConfig
 
 export function RevenueChart() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Umsatzentwicklung</CardTitle>
-        <CardDescription>Letzte 6 Monate · Umsatz vs. Ziel</CardDescription>
+        <CardTitle>Revenue trend</CardTitle>
+        <CardDescription>Last 6 months · Revenue vs. target</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="h-[260px] w-full">
           <AreaChart data={revenue} margin={{ left: 4, right: 4, top: 4 }}>
             <defs>
-              <linearGradient id="fillUmsatz" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="var(--color-umsatz)" stopOpacity={0.7} />
-                <stop offset="95%" stopColor="var(--color-umsatz)" stopOpacity={0.05} />
+              <linearGradient id="fillRevenue" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="var(--color-revenue)" stopOpacity={0.7} />
+                <stop offset="95%" stopColor="var(--color-revenue)" stopOpacity={0.05} />
               </linearGradient>
-              <linearGradient id="fillZiel" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="var(--color-ziel)" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="var(--color-ziel)" stopOpacity={0.03} />
+              <linearGradient id="fillTarget" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="var(--color-target)" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="var(--color-target)" stopOpacity={0.03} />
               </linearGradient>
             </defs>
             <CartesianGrid vertical={false} />
@@ -49,18 +49,18 @@ export function RevenueChart() {
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <Area
-              dataKey="ziel"
+              dataKey="target"
               type="monotone"
-              fill="url(#fillZiel)"
-              stroke="var(--color-ziel)"
+              fill="url(#fillTarget)"
+              stroke="var(--color-target)"
               strokeDasharray="4 4"
               strokeWidth={2}
             />
             <Area
-              dataKey="umsatz"
+              dataKey="revenue"
               type="monotone"
-              fill="url(#fillUmsatz)"
-              stroke="var(--color-umsatz)"
+              fill="url(#fillRevenue)"
+              stroke="var(--color-revenue)"
               strokeWidth={2}
             />
           </AreaChart>

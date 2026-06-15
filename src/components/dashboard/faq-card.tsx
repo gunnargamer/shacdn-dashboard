@@ -14,16 +14,16 @@ import {
 
 const faqs = [
   {
-    q: "Wie oft werden die Daten aktualisiert?",
-    a: "Die Kennzahlen werden alle 15 Minuten synchronisiert. Manuelle Aktualisierung ist jederzeit über das Filtermenü möglich.",
+    q: "How often is the data updated?",
+    a: "Metrics sync every 15 minutes. You can refresh manually anytime from the filter menu.",
   },
   {
-    q: "Kann ich Berichte exportieren?",
-    a: "Ja — jeder Bericht lässt sich als CSV oder PDF exportieren. Geteilte Berichte sind für alle Team-Mitglieder sichtbar.",
+    q: "Can I export reports?",
+    a: "Yes — every report can be exported as CSV or PDF. Shared reports are visible to all team members.",
   },
   {
-    q: "Wie verwalte ich Zugriffsrechte?",
-    a: "Im Team-Bereich kannst du pro Mitglied Rollen (Admin, Editor, Viewer) und Zugriff per Schalter steuern.",
+    q: "How do I manage access rights?",
+    a: "In the Team section you can set roles (Admin, Editor, Viewer) and toggle access per member.",
   },
 ]
 
@@ -31,8 +31,8 @@ export function FaqCard() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Häufige Fragen</CardTitle>
-        <CardDescription>Kurz erklärt</CardDescription>
+        <CardTitle>FAQ</CardTitle>
+        <CardDescription>Quick answers</CardDescription>
       </CardHeader>
       <CardContent>
         <Accordion defaultValue={["faq-0"]}>

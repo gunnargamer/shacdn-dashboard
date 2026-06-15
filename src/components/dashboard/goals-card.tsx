@@ -12,8 +12,8 @@ export function GoalsCard() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Ziele</CardTitle>
-        <CardDescription>Fortschritt im Juni</CardDescription>
+        <CardTitle>Goals</CardTitle>
+        <CardDescription>Progress in June</CardDescription>
       </CardHeader>
       <CardContent className="space-y-5">
         {goals.map((goal) => (

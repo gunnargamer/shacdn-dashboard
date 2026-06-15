@@ -27,26 +27,26 @@ export function QuickSettings() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Einstellungen</CardTitle>
-        <CardDescription>Schnellkonfiguration</CardDescription>
+        <CardTitle>Settings</CardTitle>
+        <CardDescription>Quick configuration</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-5">
         <div className="flex items-center justify-between">
-          <Label htmlFor="qs-notify">E-Mail-Benachrichtigungen</Label>
+          <Label htmlFor="qs-notify">Email notifications</Label>
           <Switch id="qs-notify" defaultChecked />
         </div>
         <div className="flex items-center justify-between">
-          <Label htmlFor="qs-digest">Wöchentliche Zusammenfassung</Label>
+          <Label htmlFor="qs-digest">Weekly digest</Label>
           <Switch id="qs-digest" />
         </div>
 
         <Separator />
 
         <div className="grid gap-2">
-          <Label>Anzeigedichte</Label>
-          <ToggleGroup defaultValue={["komfort"]} variant="outline" className="w-full">
-            <ToggleGroupItem value="kompakt" className="flex-1">Kompakt</ToggleGroupItem>
-            <ToggleGroupItem value="komfort" className="flex-1">Komfort</ToggleGroupItem>
+          <Label>Display density</Label>
+          <ToggleGroup defaultValue={["comfortable"]} variant="outline" className="w-full">
+            <ToggleGroupItem value="compact" className="flex-1">Compact</ToggleGroupItem>
+            <ToggleGroupItem value="comfortable" className="flex-1">Comfortable</ToggleGroupItem>
           </ToggleGroup>
         </div>
 
@@ -54,12 +54,12 @@ export function QuickSettings() {
           <Label>Theme</Label>
           <RadioGroup defaultValue="system" className="gap-2">
             <div className="flex items-center gap-2">
-              <RadioGroupItem value="hell" id="t-hell" />
-              <Label htmlFor="t-hell" className="font-normal">Hell</Label>
+              <RadioGroupItem value="light" id="t-light" />
+              <Label htmlFor="t-light" className="font-normal">Light</Label>
             </div>
             <div className="flex items-center gap-2">
-              <RadioGroupItem value="dunkel" id="t-dunkel" />
-              <Label htmlFor="t-dunkel" className="font-normal">Dunkel</Label>
+              <RadioGroupItem value="dark" id="t-dark" />
+              <Label htmlFor="t-dark" className="font-normal">Dark</Label>
             </div>
             <div className="flex items-center gap-2">
               <RadioGroupItem value="system" id="t-system" />
@@ -72,13 +72,13 @@ export function QuickSettings() {
           <CollapsibleTrigger
             render={
               <Button variant="ghost" className="w-full justify-between px-0">
-                Erweitert
+                Advanced
                 <ChevronsUpDown className="size-4" />
               </Button>
             }
           />
           <CollapsibleContent className="grid gap-2 pt-2">
-            <Label>Cache-Größe (MB)</Label>
+            <Label>Cache size (MB)</Label>
             <Slider defaultValue={[256]} max={1024} step={64} />
           </CollapsibleContent>
         </Collapsible>

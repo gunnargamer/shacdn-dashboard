@@ -12,25 +12,25 @@ import {
 } from "@/components/ui/card"
 import { activity } from "@/data"
 
-const typLabel: Record<string, { text: string; variant: "default" | "secondary" | "destructive" }> = {
-  neu: { text: "Neu", variant: "default" },
+const typeLabel: Record<string, { text: string; variant: "default" | "secondary" | "destructive" }> = {
+  new: { text: "New", variant: "default" },
   update: { text: "Update", variant: "secondary" },
-  warnung: { text: "Warnung", variant: "destructive" },
+  warning: { text: "Warning", variant: "destructive" },
 }
 
 export function ActivityCard() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Aktivität</CardTitle>
-        <CardDescription>Letzte Ereignisse im Workspace</CardDescription>
+        <CardTitle>Activity</CardTitle>
+        <CardDescription>Recent workspace events</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-3">
         <Alert>
           <TriangleAlert />
-          <AlertTitle>Speicher fast voll</AlertTitle>
+          <AlertTitle>Storage almost full</AlertTitle>
           <AlertDescription>
-            Dein Workspace ist zu 80 % ausgelastet. Upgrade empfohlen.
+            Your workspace is 80% full. Upgrade recommended.
           </AlertDescription>
         </Alert>
 
@@ -39,16 +39,16 @@ export function ActivityCard() {
             {activity.map((a, i) => (
               <div key={i} className="flex items-start gap-3">
                 <Avatar className="size-8">
-                  <AvatarFallback>{a.initialen}</AvatarFallback>
+                  <AvatarFallback>{a.initials}</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 gap-0.5 leading-snug">
                   <p className="text-sm">
-                    <span className="font-medium">{a.wer}</span> {a.was}
+                    <span className="font-medium">{a.who}</span> {a.what}
                   </p>
-                  <span className="text-xs text-muted-foreground">{a.wann}</span>
+                  <span className="text-xs text-muted-foreground">{a.when}</span>
                 </div>
-                <Badge variant={typLabel[a.typ].variant}>
-                  {typLabel[a.typ].text}
+                <Badge variant={typeLabel[a.type].variant}>
+                  {typeLabel[a.type].text}
                 </Badge>
               </div>
             ))}

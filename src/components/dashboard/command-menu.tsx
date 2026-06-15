@@ -42,26 +42,26 @@ export function CommandMenu() {
         onClick={() => setOpen(true)}
       >
         <Search className="size-4" />
-        Suchen…
+        Search…
         <CommandShortcut>⌘K</CommandShortcut>
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Befehl oder Suche eingeben…" />
+        <CommandInput placeholder="Type a command or search…" />
         <CommandList>
-          <CommandEmpty>Keine Ergebnisse.</CommandEmpty>
+          <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Navigation">
             <CommandItem>
               <LayoutDashboard />
-              Übersicht
+              Overview
             </CommandItem>
             <CommandItem>
               <CreditCard />
-              Umsätze
+              Sales
             </CommandItem>
             <CommandItem>
               <Users />
-              Kunden
+              Customers
             </CommandItem>
             <CommandItem>
               <BarChart3 />
@@ -69,14 +69,14 @@ export function CommandMenu() {
             </CommandItem>
           </CommandGroup>
           <CommandSeparator />
-          <CommandGroup heading="Aktionen">
+          <CommandGroup heading="Actions">
             <CommandItem>
-              Neuer Bericht
+              New report
               <CommandShortcut>⌘N</CommandShortcut>
             </CommandItem>
             <CommandItem>
               <Settings />
-              Einstellungen
+              Settings
               <CommandShortcut>⌘,</CommandShortcut>
             </CommandItem>
           </CommandGroup>
