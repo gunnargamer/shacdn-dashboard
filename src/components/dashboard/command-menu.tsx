@@ -57,7 +57,7 @@ export function CommandMenu() {
             </CommandItem>
             <CommandItem>
               <CreditCard />
-              Sales
+              Task Management
             </CommandItem>
             <CommandItem>
               <Users />

@@ -22,7 +22,7 @@ export type NavItem = { id: ViewId; label: string; icon: LucideIcon }
 
 export const NAV: NavItem[] = [
   { id: "overview", label: "Overview", icon: LayoutDashboard },
-  { id: "sales", label: "Sales", icon: Wallet },
+  { id: "sales", label: "Task Management", icon: Wallet },
   { id: "customers", label: "Customers", icon: Users },
   { id: "analytics", label: "Analytics", icon: BarChart3 },
   { id: "products", label: "Products", icon: Boxes },
