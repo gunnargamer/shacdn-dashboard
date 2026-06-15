@@ -1,8 +1,7 @@
-import { Bell, Search } from "lucide-react"
+import { Bell } from "lucide-react"
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import {
@@ -13,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { CommandMenu } from "@/components/dashboard/command-menu"
 
 export function SiteHeader() {
   return (
@@ -23,9 +23,8 @@ export function SiteHeader() {
         <h1 className="text-base font-semibold">Übersicht</h1>
       </div>
 
-      <div className="relative ml-auto w-full max-w-xs">
-        <Search className="absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground" />
-        <Input placeholder="Suchen…" className="pl-8" />
+      <div className="ml-auto">
+        <CommandMenu />
       </div>
 
       <Button variant="ghost" size="icon" aria-label="Benachrichtigungen">

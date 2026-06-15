@@ -52,3 +52,45 @@ export const goals: Goal[] = [
   { label: "Onboarding-Quote", value: 61 },
   { label: "Support-SLA", value: 93 },
 ]
+
+export type Channel = { kanal: string; besuche: number }
+
+export const channels: Channel[] = [
+  { kanal: "Direkt", besuche: 4200 },
+  { kanal: "Organisch", besuche: 3800 },
+  { kanal: "Social", besuche: 2400 },
+  { kanal: "E-Mail", besuche: 1900 },
+  { kanal: "Referral", besuche: 1100 },
+]
+
+export type TeamMember = {
+  name: string
+  initialen: string
+  rolle: string
+  email: string
+  online: boolean
+}
+
+export const team: TeamMember[] = [
+  { name: "Lena Hofmann", initialen: "LH", rolle: "Admin", email: "lena@acme.io", online: true },
+  { name: "Marco Weber", initialen: "MW", rolle: "Editor", email: "marco@acme.io", online: true },
+  { name: "Tilda Brand", initialen: "TB", rolle: "Viewer", email: "tilda@acme.io", online: false },
+  { name: "Priya Nair", initialen: "PN", rolle: "Editor", email: "priya@acme.io", online: false },
+]
+
+export type Activity = {
+  wer: string
+  initialen: string
+  was: string
+  wann: string
+  typ: "neu" | "update" | "warnung"
+}
+
+export const activity: Activity[] = [
+  { wer: "Lena Hofmann", initialen: "LH", was: "hat Rechnung INV-2041 als bezahlt markiert", wann: "vor 12 Min", typ: "update" },
+  { wer: "System", initialen: "SY", was: "Backup erfolgreich abgeschlossen", wann: "vor 40 Min", typ: "neu" },
+  { wer: "Marco Weber", initialen: "MW", was: "hat 3 neue Kunden importiert", wann: "vor 1 Std", typ: "neu" },
+  { wer: "System", initialen: "SY", was: "Speicherkontingent zu 80 % ausgelastet", wann: "vor 2 Std", typ: "warnung" },
+  { wer: "Priya Nair", initialen: "PN", was: "hat Bericht „Q2 Umsatz“ geteilt", wann: "vor 3 Std", typ: "update" },
+  { wer: "Tilda Brand", initialen: "TB", was: "hat das Workspace-Logo aktualisiert", wann: "gestern", typ: "update" },
+]
